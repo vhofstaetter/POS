@@ -1,6 +1,7 @@
 package net.htlgkr.hove.pos3.primzahlen;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
     public List<Integer> numberslist = new ArrayList<>();
     public List<Integer> primesList = new ArrayList<>();
     public int uppercase;
+
 
     public EratosthenesPrimeSieve(int uppercase) {
         this.uppercase = uppercase;
@@ -27,10 +29,19 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
     }
 
     public void primeCalculator() {
-        fillingList();
-        boolean primeNumber = true;
-        for (int i = 1; i < numberslist.size(); i++) {
-            for (int j = 0; j < numberslist.size(); j++) {
+        boolean array[] = new boolean[uppercase];
+        array[0] = false;
+        array[1] = false;
+        for (int i = 2; i <= array.length; i++) {
+            array[i] = true;
+        }
+
+
+        //fillingList();
+
+        /*boolean primeNumber = true;
+        for (int i = 1; i <= numberslist.size(); i++) {
+            for (int j = 0; j <= numberslist.size(); j++) {
                 if(2*j == numberslist.get(i)){
                     primeNumber = false;
                 }
@@ -40,7 +51,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
             }
 
         }
-        /*for (int i = 2; i <= numberslist.size(); i++) {
+        for (int i = 2; i <= numberslist.size(); i++) {
             boolean prime = isPrime(3);
             if (prime) {
                 for (int j = i; j < numberslist.size(); j++) {
@@ -54,7 +65,6 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public void fillingPrimesList(int i) {
        primesList.add(i);
-
     }
 
     @Override
