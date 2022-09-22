@@ -7,7 +7,6 @@ import java.util.List;
 
 public class EratosthenesPrimeSieve implements PrimeSieve {
 
-    public List<Integer> numberslist = new ArrayList<>();
     public List<Integer> primesList = new ArrayList<>();
     public int uppercase;
 
@@ -22,56 +21,42 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         eratosthenesPrimeSieve.printPrimes();
     }
 
-    public void fillingList() {
-        for (int i = 2; i <= uppercase; i++) {
-            numberslist.add(i);
-        }
-    }
 
     public void primeCalculator() {
-        boolean array[] = new boolean[uppercase];
-        array[0] = false;
-        array[1] = false;
-        for (int i = 2; i <= array.length; i++) {
-            array[i] = true;
+        boolean[] primesArray = new boolean[uppercase+1];
+        primesArray[0] = false;
+        primesArray[1] = false;
+        for (int i = 2; i < primesArray.length; i++) {
+            primesArray[i] = true;
+        }
+        //mit 2 vervielfachen
+        for (int i = 2; i <= primesArray.length / 2; i++) {
+            primesArray[i * 2] = false;
         }
 
-
-        //fillingList();
-
-        /*boolean primeNumber = true;
-        for (int i = 1; i <= numberslist.size(); i++) {
-            for (int j = 0; j <= numberslist.size(); j++) {
-                if(2*j == numberslist.get(i)){
-                    primeNumber = false;
-                }
+        for (int i = 3; i < primesArray.length; i++) {
+            if (primesArray[i]) {
+                boolean checkIfPrime = isPrime(i);
+                primesArray[i] = checkIfPrime;
             }
-            if (primeNumber){
-                fillingPrimesList(i);
+            //vervielfachen mit zahl
+            for (int j = 2; j < primesArray.length / i; j++) {
+                primesArray[i * j] = false;
             }
 
         }
-        for (int i = 2; i <= numberslist.size(); i++) {
-            boolean prime = isPrime(3);
-            if (prime) {
-                for (int j = i; j < numberslist.size(); j++) {
-                    if (j % i == 0) {
-                        fillingPrimesList(j);
-                    }
-                }
+        for (int i = 0; i < primesArray.length; i++) {
+            if (primesArray[i]) {
+                primesList.add(i);
             }
-        }*/
-    }
+        }
 
-    public void fillingPrimesList(int i) {
-       primesList.add(i);
     }
 
     @Override
     public boolean isPrime(int p) {
         for (int i = p + 1; i <= uppercase; i++) {
             if (p % i == 0) {
-                fillingPrimesList(p);
                 return false;
             }
         }
