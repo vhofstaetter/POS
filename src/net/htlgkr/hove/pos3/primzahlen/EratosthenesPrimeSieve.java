@@ -41,6 +41,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public void deletingList(int i) {
         numberslist.remove(i);
+
     }
 
     @Override
