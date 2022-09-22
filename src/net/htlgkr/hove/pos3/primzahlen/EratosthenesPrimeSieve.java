@@ -29,12 +29,13 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         fillingList();
         for (int i = 2; i < numberslist.size(); i++) {
             boolean prime = isPrime(numberslist.get(i));
-            for (int j = i; j < numberslist.size(); j++) {
-                if (j % i == 0) {
-                    deletingList(j);
+            if (prime) {
+                for (int j = i; j < numberslist.size(); j++) {
+                    if (j % i == 0) {
+                        deletingList(j);
+                    }
                 }
             }
-
         }
     }
 
