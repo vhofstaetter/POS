@@ -7,6 +7,7 @@ import java.util.List;
 public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public List<Integer> numberslist = new ArrayList<>();
+    public List<Integer> primesList = new ArrayList<>();
     public int uppercase;
 
     public EratosthenesPrimeSieve(int uppercase) {
@@ -27,28 +28,40 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public void primeCalculator() {
         fillingList();
-        for (int i = 2; i < numberslist.size(); i++) {
-            boolean prime = isPrime(numberslist.get(i));
+        boolean primeNumber = true;
+        for (int i = 1; i < numberslist.size(); i++) {
+            for (int j = 0; j < numberslist.size(); j++) {
+                if(2*j == numberslist.get(i)){
+                    primeNumber = false;
+                }
+            }
+            if (primeNumber){
+                fillingPrimesList(i);
+            }
+
+        }
+        /*for (int i = 2; i <= numberslist.size(); i++) {
+            boolean prime = isPrime(3);
             if (prime) {
                 for (int j = i; j < numberslist.size(); j++) {
                     if (j % i == 0) {
-                        deletingList(j);
+                        fillingPrimesList(j);
                     }
                 }
             }
-        }
+        }*/
     }
 
-    public void deletingList(int i) {
-        numberslist.remove(i);
+    public void fillingPrimesList(int i) {
+       primesList.add(i);
 
     }
 
     @Override
     public boolean isPrime(int p) {
-        for (int i = p + 1; i < uppercase; i++) {
+        for (int i = p + 1; i <= uppercase; i++) {
             if (p % i == 0) {
-                deletingList(p);
+                fillingPrimesList(p);
                 return false;
             }
         }
@@ -58,6 +71,6 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
     @Override
     public void printPrimes() {
         System.out.println("The prime nubers are: ");
-        System.out.println(numberslist);
+        System.out.println(primesList);
     }
 }
