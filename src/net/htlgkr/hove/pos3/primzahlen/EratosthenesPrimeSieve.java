@@ -1,7 +1,5 @@
 package net.htlgkr.hove.pos3.primzahlen;
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,6 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public List<Integer> primesList = new ArrayList<>();
     public int uppercase;
-
 
     public EratosthenesPrimeSieve(int uppercase) {
         this.uppercase = uppercase;
@@ -20,7 +17,6 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         eratosthenesPrimeSieve.primeCalculator();
         eratosthenesPrimeSieve.printPrimes();
     }
-
 
     public void primeCalculator() {
         boolean[] primesArray = new boolean[uppercase+1];
@@ -40,17 +36,16 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
                 primesArray[i] = checkIfPrime;
             }
             //vervielfachen mit zahl
-            for (int j = 2; j < primesArray.length / i; j++) {
+            for (int j = 2; j <= primesArray.length / i; j++) {
                 primesArray[i * j] = false;
             }
-
         }
+
         for (int i = 0; i < primesArray.length; i++) {
             if (primesArray[i]) {
                 primesList.add(i);
             }
         }
-
     }
 
     @Override
